@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import path from "path"
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 
@@ -31,5 +32,10 @@ export default defineConfig({
   target: 'esnext',
   minify: false,
   cssCodeSplit: false,
+ },
+ resolve: {
+  alias: {
+   "@": path.resolve(__dirname, "./src"),
+  },
  },
 });

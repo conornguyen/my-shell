@@ -2,6 +2,8 @@ import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom"
 import { useAuth } from "../provider/auth-provider";
 import { ProtectedRoute } from "./protected-route";
 import Login from '../containers/login';
+import Register from '../containers/register/index';
+import ListUser from '@/containers/list-user';
 
 const Routes = () => {
  const { token } = useAuth();
@@ -41,6 +43,14 @@ const Routes = () => {
   {
    path: "/login",
    element: <Login/>,
+  },
+  {
+   path: "/register",
+   element: <Register/>,
+  },
+  {
+   path: "/user",
+   element: <ListUser/>,
   },
  ];
 

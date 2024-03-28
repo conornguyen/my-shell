@@ -1,7 +1,8 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Input, Button } from '@nextui-org/react';
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 
 
@@ -17,7 +18,7 @@ const Login = () => {
   },
  };
  const { register, handleSubmit, formState } = useForm(formOptions);
- console.log(formState.errors);
+
  const onSubmit = (data) => console.log(data);
  return <div>
   <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,15 +28,14 @@ const Login = () => {
     </h1>
     <Input
      className='max-w-xs'
-     type='text'
+     placeholder="Email"
      isInvalid={!!formState.errors['username']}
      errorMessage={formState.errors['username']?.message}
      label='Email' {...register('username')}
     />
     <Input
+     placeholder="Password"
      className='max-w-xs'
-     type='password'
-     label='Password'
      isInvalid={!!formState.errors['password']}
      errorMessage={formState.errors['password']?.message}
      {...register('password')}
