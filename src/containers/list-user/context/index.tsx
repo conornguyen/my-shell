@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useContext } from 'react';
+import { PropsWithChildren, createContext, useContext } from 'react';
 import { useUsers } from '@/containers/list-user/hooks/useUsers';
 
 export type TUserContextValue = {

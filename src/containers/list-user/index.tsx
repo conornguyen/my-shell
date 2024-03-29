@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { UserProvider, useUserContext } from '@/containers/list-user/context';
+import { UserProvider } from '@/containers/list-user/context';
 import { ListUser } from '@/containers/list-user/list';
 
 const ListUserPage = () => {

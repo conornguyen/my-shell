@@ -13,8 +13,6 @@ import {
 } from '@tanstack/react-table';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-
 import {
  Table,
  TableBody,
@@ -98,36 +96,36 @@ const DragAlongCell = ({ cell }: { cell: Cell<Person, unknown> }) => {
  );
 };
 
-export function DataTable<TData, TValue>({ columns }) {
- const [pagination, setPagination] = React.useState<PaginationState>({
-  pageIndex: 0,
-  pageSize: 10,
- });
- const [columnOrder, setColumnOrder] = React.useState<string[]>(() => columns.map((c) => c.id!));
- const [sorting, setSorting] = React.useState<SortingState>([]);
- const [columnVisibility, setColumnVisibility] = React.useState({});
-
- const dataQuery = useQuery({
-  queryKey: ['data', pagination],
-  queryFn: () => fetchData(pagination),
-  placeholderData: keepPreviousData,
- });
+export function DataTable<TData, TValue>(props) {
+ const {
+  columnVisibility,
+  pagination,
+  columnOrder,
+  sorting,
+  columns,
+  data,
+  setSorting,
+  setColumnVisibility,
+  setColumnOrder,
+  setPagination,
+ } = props;
 
  const defaultData = React.useMemo(() => [], []);
  const table = useReactTable({
-  data: dataQuery.data?.rows ?? defaultData,
+  data: data?.data?.rows ?? defaultData,
   columns,
-  rowCount: dataQuery.data?.rowCount,
+  rowCount: data?.data?.rowCount,
   manualPagination: true,
   getCoreRowModel: getCoreRowModel(),
   getPaginationRowModel: getPaginationRowModel(),
-  onSortingChange: setSorting,
   getSortedRowModel: getSortedRowModel(),
   state: {
    columnVisibility,
    pagination,
    columnOrder,
+   sorting,
   },
+  onSortingChange: setSorting,
   onColumnVisibilityChange: setColumnVisibility,
   onColumnOrderChange: setColumnOrder,
   onPaginationChange: setPagination,
@@ -169,7 +167,7 @@ export function DataTable<TData, TValue>({ columns }) {
          onChange: item.getToggleVisibilityHandler(),
         }}
        />
-       {item.columnDef.header}
+       {item.id}
       </label>
      </div>
     );
