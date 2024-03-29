@@ -1,21 +1,20 @@
-import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
-import { useAuth } from "../provider/auth-provider";
-import { ProtectedRoute } from "./protected-route";
+import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
+import { useAuth } from '@/provider/auth-provider';
+import { ProtectedRoute } from './protected-route';
 import Login from '../containers/login';
 import Register from '../containers/register/index';
-import ListUser from '@/containers/list-user';
+import ListUserPage from '@/containers/list-user';
 
 const Routes = () => {
  const { token } = useAuth();
 
- // Define public routes accessible to all users
  const routesForPublic = [
   {
-   path: "/service",
+   path: '/service',
    element: <div>Service Page</div>,
   },
   {
-   path: "/about-us",
+   path: '/about-us',
    element: <div>About Us</div>,
   },
  ];
@@ -23,11 +22,11 @@ const Routes = () => {
  // Define routes accessible only to authenticated users
  const routesForAuthenticatedOnly = [
   {
-   path: "/",
+   path: '/',
    element: <ProtectedRoute />, // Wrap the component in ProtectedRoute
    children: [
     {
-     path: "/logout",
+     path: '/logout',
      element: <div>Logout</div>,
     },
    ],
@@ -37,20 +36,20 @@ const Routes = () => {
  // Define routes accessible only to non-authenticated users
  const routesForNotAuthenticatedOnly = [
   {
-   path: "/",
-   element: <Navigate to={'login'}/>,
+   path: '/',
+   element: <Navigate to={'login'} />,
   },
   {
-   path: "/login",
-   element: <Login/>,
+   path: '/login',
+   element: <Login />,
   },
   {
-   path: "/register",
-   element: <Register/>,
+   path: '/register',
+   element: <Register />,
   },
   {
-   path: "/user",
-   element: <ListUser/>,
+   path: '/user',
+   element: <ListUserPage />,
   },
  ];
 

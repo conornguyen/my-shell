@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import './App.css';
 import React, { Suspense } from 'react';
-import SaleApp from './page/my-shell-sale/index';
 import AuthProvider from './provider/auth-provider';
 import Routes from './routes/routes';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+ const queryClient = new QueryClient();
  return (
-   <AuthProvider>
-     <Routes />
-   </AuthProvider>
+  <AuthProvider>
+   <QueryClientProvider client={queryClient}>
+    <Routes />
+   </QueryClientProvider>
+  </AuthProvider>
  );
 }
 
